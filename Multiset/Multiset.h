@@ -3,7 +3,12 @@
 #include "Constants.h"
 
 namespace MultisetHelpers {
-	unsigned char getMask(unsigned int n);
+	uint8_t getBitIndex(unsigned int num, uint8_t maxBitsK);
+
+	unsigned int getByteIndex(int num, uint8_t maxBitsK);
+	unsigned char getMask(unsigned int num, unsigned int k);
+
+	void printInBinary(unsigned int number, uint8_t k);
 }
 
 class Multiset {
@@ -23,17 +28,21 @@ public:
 	Multiset(unsigned int maxNumberN, uint8_t maxBitsK);
 	Multiset(const Multiset& other);
 	Multiset& operator=(const Multiset& other);
-	~Multiset();
+	~Multiset() noexcept;
 
-	void add(unsigned int num);
-	int count(unsigned int num) const;
+	void add(unsigned int num, unsigned int times = 1);
+	unsigned int count(unsigned int num) const;
 	void print() const;
 	void printInMemory() const;
 	void printCounts() const;
 
-	friend std::istream& operator>>(std::istream& is, Multiset& multiset);
-	friend std::ostream& operator<<(std::ostream& of, const Multiset& multiset);
+	void readFromBinaryFile(const char* fileName);
+	void writeToBinaryFile(const char* fileName) const;
+
 	friend Multiset multisetsUnion(const Multiset& lhs, const Multiset& rhs);
 	friend Multiset multisetsIntersection(const Multiset& lhs, const Multiset& rhs);
+	friend Multiset multisetsDifference(const Multiset& lhs, const Multiset& rhs);
+	friend Multiset multisetsAddition(const Multiset& multiset);
+
 };
 

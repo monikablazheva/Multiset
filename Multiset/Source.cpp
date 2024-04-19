@@ -3,47 +3,101 @@
 
 int main()
 {
-    Multiset multiSet(10, 3);
+    try {
+        Multiset multiSet(5, 3);
 
-    //// Perform 'add' operations to increment occurrence counts
-    //multiSet.add(1); // Increment occurrence count for element 1
-    //multiSet.add(1); // Increment occurrence count for element 2
-    //multiSet.add(2); // Increment occurrence count for element 2 (again)
-    //multiSet.add(1);
+        multiSet.add(1);
 
-    //multiSet.add(5); 
-    //multiSet.add(5);
-    //multiSet.add(5);
+        multiSet.add(2);
+        multiSet.add(2);
 
-    //multiSet.add(7);
-    //multiSet.add(7);//???
-    //multiSet.add(7);
-    //multiSet.add(7);
+        /*multiSet.add(3);
+        multiSet.add(3);
+        multiSet.add(3);*/
 
-    multiSet.add(0);
+        multiSet.add(4);
+        multiSet.add(4);
+        multiSet.add(4);
+        multiSet.add(4);
 
-    multiSet.add(1);
-    multiSet.add(2);
-    
-    multiSet.add(3);
-    multiSet.add(4);
-    multiSet.add(5);
-    multiSet.add(5);
-    multiSet.add(6);
+        multiSet.add(5);
+        multiSet.add(5);
+        multiSet.add(5);
+        multiSet.add(5);
+        multiSet.add(5);
+        multiSet.add(5);
+        multiSet.add(5);
 
-    multiSet.add(6);
-    multiSet.add(8);
-    multiSet.add(7);
-    multiSet.add(9);
- 
-    multiSet.add(10);
+        multiSet.printCounts();
+        std::cout << std::endl;
 
-    // Print the current state of the counts vector
-    multiSet.printCounts();
-    std::cout << std::endl;
+        multiSet.print();
+        std::cout << std::endl;
 
-    multiSet.print();
-    std::cout << std::endl;
+        multiSet.printInMemory();
 
-    multiSet.printInMemory();
+        std::cout << "From file -----------------------------" << std::endl;
+
+        Multiset multiSetFile(10, 8);
+        multiSetFile.readFromBinaryFile("multiculti.txt");
+
+        multiSetFile.printCounts();
+        std::cout << std::endl;
+
+        multiSetFile.print();
+        std::cout << std::endl;
+
+        multiSetFile.printInMemory();
+
+        std::cout << "Union -----------------------------" << std::endl;
+
+        Multiset unionM = multisetsUnion(multiSet, multiSetFile);
+
+        unionM.printCounts();
+        std::cout << std::endl;
+
+        unionM.print();
+        std::cout << std::endl;
+
+        unionM.printInMemory();
+
+        std::cout << "Intersection -----------------------------" << std::endl;
+
+        Multiset intersection = multisetsIntersection(multiSet, multiSetFile);
+
+        intersection.printCounts();
+        std::cout << std::endl;
+
+        intersection.print();
+        std::cout << std::endl;
+
+        intersection.printInMemory();
+
+        std::cout << "Difference -----------------------------" << std::endl;
+
+        Multiset diff = multisetsDifference(multiSet, multiSetFile);
+
+        diff.printCounts();
+        std::cout << std::endl;
+
+        diff.print();
+        std::cout << std::endl;
+
+        diff.printInMemory();
+
+        std::cout << "Addition -----------------------------" << std::endl;
+
+        Multiset addition = multisetsAddition(multiSet);
+
+        addition.printCounts();
+        std::cout << std::endl;
+
+        addition.print();
+        std::cout << std::endl;
+
+        addition.printInMemory();
+    }
+    catch (std::logic_error& e) {
+        std::cout << e.what() << std::endl; // съобщението на грешката
+    }
 }
